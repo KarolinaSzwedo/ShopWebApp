@@ -1,0 +1,51 @@
+{% extends "bootstrap.html" %}
+
+{% block head %}
+<title>Registration</title>
+{% endblock %}
+
+{% block content %}
+
+<body>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+	  {% if messages %}
+	    <ul class=flashes>
+	    {% for category, message in messages %}
+				<div class="alert alert-{{ category }} alert-dismissible" role="alert">
+
+			 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		      <li class="{{ category }}">{{ message }}</li>
+	    {% endfor %}
+	    </ul>
+	  {% endif %}
+	{% endwith %}
+
+	<div class = "container">
+		<br>
+		{% from "formhelpers.html" import render_field %}
+		<form method=post action="/register/" class="col-lg-6 offset-lg-3">
+
+				<fieldset class="border p-2" >
+					<legend  class="w-auto">Registration form</legend>
+						<dl>
+			        {{ form.hidden_tag() }}
+							{{render_field(form.username)}}
+							{{render_field(form.email)}}
+							{{render_field(form.password)}}
+							{{render_field(form.confirm)}}
+							{{form.accept_tos}} {{form.accept_tos.label }}
+
+						</dl>
+
+						<p>	<button type="submit" class="btn btn-secondary">Register</button> </p>
+		 </fieldset>
+		</form>
+
+		{% if error %}
+			<p class="error"><strong>Error:</strong>{{error}}</p>
+		{% endif %}
+
+	</div>
+</body>
+
+{% endblock %}

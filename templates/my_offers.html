@@ -1,0 +1,59 @@
+{% extends "bootstrap.html" %}
+
+{% block head %}
+<title>My offers</title>
+{% endblock %}
+
+
+{% block content %}
+<br><br>
+<div class="container">
+  <div class="row">
+          {% for offer in my_offers %}
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+
+                <img src="{{ offer[7]|resize('700x300', format='jpg', fill=1) }}" alt="none">
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <p style="color:blue;">{{offer[3]}}</p>
+                  </h4>
+                  <h5>{{offer[5]}} EUR</h5>
+                  <p class="card-text">{{offer[4]}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Create Date: {{offer[6]}}</li>
+                </ul>
+
+                <div class="card-footer">
+                  <button class="btn btn-lg btn-secondary btn-success" type="button" disabled>Active</button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+          {% for offer in sold %}
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+
+                <img src="{{ offer[7]|resize('700x300', format='jpg', fill=1) }}" alt="none">
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <p style="color:blue;">{{offer[3]}}</p>
+                  </h4>
+                  <h5>{{offer[5]}} EUR</h5>
+                  <p class="card-text">{{offer[4]}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Buyer: {{offer[2]}}</li>
+                  <li class="list-group-item">Date: {{offer[6]}}</li>
+                </ul>
+                <div class="card-footer">
+                  <button class="btn btn-lg btn-secondary btn-danger" type="button" disabled>Sold</button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+</div>
+{% endblock %}

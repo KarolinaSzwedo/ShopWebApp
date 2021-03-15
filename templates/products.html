@@ -1,0 +1,57 @@
+{% extends "bootstrap.html" %}
+
+{% block head %}
+<title>Products</title>
+{% endblock %}
+
+{% block content %}
+<br><br>
+<div class="container">
+  <div class="row">
+          {% for product in products %}
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+
+                <img src="{{ product[7]|resize('700x300', format='jpg', fill=1) }}" alt="none">
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <p style="color:blue;">{{product[3]}}</p>
+                  </h4>
+                  <h5>{{product[5]}} EUR</h5>
+                  <p class="card-text">{{product[4]}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Seller: {{product[2]}}</li>
+                  <li class="list-group-item">Create date: {{product[6]}}</li>
+                </ul>
+
+                <div class="card-footer">
+                 <a href="/buy/{{product[0]}}" class="btn btn-lg btn-secondary btn-delete  btn-block">Buy</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+          <script>
+            const btnDelete= document.querySelectorAll('.btn-block');
+            if(btnDelete) {
+              const btnArray = Array.from(btnDelete);
+              btnArray.forEach((btn) => {
+                btn.addEventListener('click', (e) => {
+                  if(!confirm('Are you sure you want to buy it?')){
+                    e.preventDefault();
+                  }
+                });
+              })
+            }
+            $(document).ready(function() {
+                $('#example').DataTable({
+                  "aLengthMenu": [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
+                    "iDisplayLength": 3
+                   }
+                );
+            } );
+            </script>
+      </div>
+</div>
+{% endblock %}

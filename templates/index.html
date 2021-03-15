@@ -1,0 +1,76 @@
+{% extends "bootstrap.html" %}
+
+{% block head %}
+<head>
+  <style>
+  body {
+    background-image: url('static/img/bg.jpg');
+  	background-repeat: no-no-repeat;
+  	background-size: cover;
+  }
+  .h-100 {
+    opacity: .6;
+  }
+  </style>
+</head>
+
+<title>Auction</title>
+{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<br><br><br><br><br><br><br><br><br><br>
+
+<div class="container">
+<div class="row">
+      <div class="col-md-3 mb-5">
+        <div class="card h-100  bg-secondary mb-3">
+          <div class="card-body">
+            <h2 class="card-title">New offer</h2>
+            <p class="card-text">Log in and add products you want to sell.</p>
+          </div>
+          <div class="card-footer">
+            <a href="/new_offer/" class="btn btn-dark btn-sm">Add new offer</a>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="col-md-4 mb-5">
+        <div class="card h-100  bg-secondary mb-3">
+          <div class="card-body">
+            <h2 class="card-title">Available products</h2>
+            <p class="card-text">Do you want to buy something? Click here and check what products are available. </p>
+          </div>
+          <div class="card-footer">
+            <a href="/products" class="btn btn-dark btn-sm">Check</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-5">
+        <div class="card h-100  bg-secondary mb-3">
+          <div class="card-body">
+            <h2 class="card-title">Archievs</h2>
+            <p class="card-text">See sold products.</p>
+          </div>
+          <div class="card-footer">
+            <a href="/archive/" class="btn btn-dark btn-sm">Go</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
